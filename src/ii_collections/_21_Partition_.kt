@@ -12,9 +12,9 @@ fun example8() {
 
 fun Shop.getCustomersWithMoreUndeliveredOrdersThanDelivered(): Set<Customer> {
     // Return customers who have more undelivered orders than delivered
-    return customers.partition {
+    return customers.filter {
         it.orders.partition(Order::isDelivered).run {
             first.count() < second.count()
         }
-    }.first.toSet()
+    }.toSet()
 }
