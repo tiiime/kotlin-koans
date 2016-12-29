@@ -2,20 +2,9 @@ package iv_properties
 
 import util.TODO
 import util.doc34
-import kotlin.reflect.KProperty
 
 class LazyPropertyUsingDelegates(val initializer: () -> Int) {
-    val lazyValue: Int by Delegate(initializer)
-}
-
-class Delegate(val initializer: () -> Int) {
-    operator fun getValue(thisRef: Any?, property: KProperty<*>): Int {
-        return initializer()
-    }
-
-    operator fun setValue(thisRef: Any?, property: KProperty<*>, value: Int) {
-        initializer()
-    }
+    val lazyValue: Int by lazy { initializer() }
 }
 
 fun todoTask34(): Lazy<Int> = TODO(
