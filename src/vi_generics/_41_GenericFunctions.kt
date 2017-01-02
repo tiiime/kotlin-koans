@@ -28,8 +28,15 @@ fun Set<Char>.partitionLettersAndOtherSymbols(): Pair<Set<Char>, Set<Char>> {
 }
 
 
-fun <T,C:Collection<T>> C.partitionTo(source: C, target: Collection<Any>, predicate:(T) -> Boolean): Pair<C, C> {
-    val res =  source.partition { predicate(it) }
+fun <T,C:MutableCollection<T>> Collection<T>.partitionTo(first: C, second: C, predicate:(T) -> Boolean): Pair<C, C> {
 
-    return Pair(res.first as C,res.second as C)
+    this.forEach {
+        if (predicate(it)){
+            first.add(it)
+        } else{
+            second.add(it)
+        }
+    }
+
+    return Pair(first,second)
 }
